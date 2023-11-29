@@ -3064,20 +3064,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dell\\.nuget\\packages\\": {}
+    "C:\\Users\\Home\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "e:\\GameMod\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
+      "projectUniqueName": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
       "projectName": "LethalCompanyTemplate",
-      "projectPath": "e:\\GameMod\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
-      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "e:\\GameMod\\SuperLandmine\\SuperLandmine\\obj\\",
+      "projectPath": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
+      "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
+      "outputPath": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "e:\\GameMod\\SuperLandmine\\SuperLandmine\\NuGet.Config",
-        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\NuGet.Config",
+        "C:\\Users\\Home\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"

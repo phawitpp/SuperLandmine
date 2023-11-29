@@ -7,13 +7,14 @@ namespace SuperLandmine
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
+        internal static ManualLogSource log;
         public Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
-        public static ManualLogSource mls;
         private void Awake()
         {
-            Logger.LogInfo($"Loading plugin {PluginInfo.PLUGIN_GUID} ...");
+            log = base.Logger;
+            log.LogInfo($"Loading plugin {PluginInfo.PLUGIN_NAME} ...");
             harmony.PatchAll();
-            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} loaded!");
+            log.LogInfo($"Plugin {PluginInfo.PLUGIN_NAME} loaded!");
         }
     }
     class PluginInfo
