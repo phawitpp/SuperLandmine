@@ -11,8 +11,8 @@ namespace SuperLandmine.Patchs
     public class SuperLandminePatch
     {
 
-        [HarmonyPatch("OnTriggerEnter")]
-        [HarmonyPrefix]
+        [HarmonyPatch("PressMineClientRpc")]
+        [HarmonyPostfix]
         public static void playAtomicSound(Landmine __instance)
         {
 
