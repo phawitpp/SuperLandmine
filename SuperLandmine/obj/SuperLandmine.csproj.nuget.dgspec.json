@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "restore": {
+    "e:\\GameMod\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj": {}
+  },
+  "projects": {
+    "e:\\GameMod\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "e:\\GameMod\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
+        "projectName": "LethalCompanyTemplate",
+        "projectPath": "e:\\GameMod\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "e:\\GameMod\\SuperLandmine\\SuperLandmine\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "e:\\GameMod\\SuperLandmine\\SuperLandmine\\NuGet.Config",
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.bepinex.dev/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "BepInEx.Analyzers": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.8, )"
+            },
+            "BepInEx.Core": {
+              "target": "Package",
+              "version": "[5.4.21, )"
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )"
+            },
+            "UnityEngine": {
+              "target": "Package",
+              "version": "[5.6.1, )"
+            },
+            "UnityEngine.Modules": {
+              "include": "Compile",
+              "target": "Package",
+              "version": "[2023.2.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
