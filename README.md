@@ -2,10 +2,10 @@
 
 Add more power to landmine
 
-* Landmine is spawn more oftenly
-* Landmine idle sound is disabled
-* Landmine damage and kill range is increase
-* Play "to be continue" song when you trigger the landmine
+* Landmine is spawn more oftenly !!
+* Landmine idle sound is disabled !!
+* Landmine damage and kill range is increase !!
+* Enemy can trigger the landmine !!!
 
 ## Installation
 ** Require BepInEx installed first
@@ -17,6 +17,11 @@ Add more power to landmine
 
 
 ## Changelog
+
+### 1.0.1
+
+* Enemy can trigger landmine
+* Delete "play continue meme song" from 1.0.0
 
 ### 1.0.0
 
