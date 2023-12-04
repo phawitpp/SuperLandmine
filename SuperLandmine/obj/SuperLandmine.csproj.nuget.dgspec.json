@@ -5,10 +5,10 @@
   },
   "projects": {
     "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "restore": {
         "projectUniqueName": "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
-        "projectName": "LethalCompanyTemplate",
+        "projectName": "SuperLandmine",
         "projectPath": "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
         "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
         "outputPath": "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\obj\\",

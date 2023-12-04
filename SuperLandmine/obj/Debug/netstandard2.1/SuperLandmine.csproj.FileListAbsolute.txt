@@ -46,9 +46,6 @@ E:\GameMod\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\Unity.Services.C
 E:\GameMod\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\Newtonsoft.Json.dll
 E:\GameMod\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\Unity.Profiling.Core.dll
 e:\GameMod\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\SuperLandmine.csproj.CopyComplete
-e:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\LethalCompanyTemplate.deps.json
-E:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\LethalCompanyTemplate.dll
-E:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\LethalCompanyTemplate.pdb
 E:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\Assembly-CSharp.dll
 E:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\Unity.Netcode.Runtime.dll
 E:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\Unity.Animation.Rigging.dll
@@ -92,5 +89,8 @@ E:\Mod\project\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\SuperLandmin
 E:\Mod\project\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\SuperLandmine.csproj.CoreCompileInputs.cache
 E:\Mod\project\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\SuperLandmine.sourcelink.json
 e:\Mod\project\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\SuperLandmine.csproj.CopyComplete
-E:\Mod\project\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\LethalCompanyTemplate.dll
-E:\Mod\project\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\LethalCompanyTemplate.pdb
+e:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\SuperLandmine.deps.json
+E:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\SuperLandmine.dll
+E:\Mod\project\SuperLandmine\SuperLandmine\bin\Debug\netstandard2.1\SuperLandmine.pdb
+E:\Mod\project\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\SuperLandmine.dll
+E:\Mod\project\SuperLandmine\SuperLandmine\obj\Debug\netstandard2.1\SuperLandmine.pdb

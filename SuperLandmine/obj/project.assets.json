@@ -3067,10 +3067,10 @@
     "C:\\Users\\Home\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "restore": {
       "projectUniqueName": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
-      "projectName": "LethalCompanyTemplate",
+      "projectName": "SuperLandmine",
       "projectPath": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
       "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
       "outputPath": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\obj\\",
