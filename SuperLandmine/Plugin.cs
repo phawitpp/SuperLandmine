@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 
@@ -9,18 +10,25 @@ namespace SuperLandmine
     {
         internal static ManualLogSource log;
         public Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+        public static ConfigEntry<int> config_LandmineAmount;
         private void Awake()
         {
             log = base.Logger;
             log.LogInfo($"Loading plugin {PluginInfo.PLUGIN_NAME} ...");
+            ConfigSetup();
             harmony.PatchAll();
             log.LogInfo($"Plugin {PluginInfo.PLUGIN_NAME} loaded!");
+        }
+        private void ConfigSetup()
+        {
+            config_LandmineAmount = ((BaseUnityPlugin)this).Config.Bind<int>("Landmine amount", "Value", 15, "How many landmine will be spawned in the map");
         }
     }
     class PluginInfo
     {
-        public const string PLUGIN_GUID = "com.github.phawitpp.superlandmine";
+        public const string PLUGIN_GUID = "Superlandmine";
         public const string PLUGIN_NAME = "SuperLandmine";
-        public const string PLUGIN_VERSION = "1.0.0";
+        public const string PLUGIN_VERSION = "1.0.3";
     }
+
 }
