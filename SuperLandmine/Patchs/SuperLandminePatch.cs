@@ -36,7 +36,7 @@ namespace SuperLandmine.Patchs
             __instance.mineAudio.volume = 1.5f;
             __instance.mineFarAudio.volume = 1.5f;
             __instance.mineAudio.pitch = Random.Range(0.93f, 1.2f);
-            __instance.mineAudio.PlayOneShot(__instance.mineDetonate, 1.5f);
+            __instance.mineAudio.PlayOneShot(__instance.mineDetonate, 1.35f);
             Landmine.SpawnExplosion(__instance.transform.position + Vector3.up, spawnExplosionEffect: true, 10.0f, 12.0f);
             yield return new WaitForSeconds(0.5f);
 
@@ -150,21 +150,53 @@ namespace SuperLandmine.Patchs
         [HarmonyPrefix]
         public static void spawnLanmine(ref SelectableLevel newLevel)
         {
-            Plugin.log.LogInfo(">>>>>>>>>>>Load landmine");
+            Plugin.log.LogInfo("Load landmine");
             SelectableLevel selectableLevel = newLevel;
             SpawnableMapObject[] spawnableMapObjects = selectableLevel.spawnableMapObjects;
-            foreach (SpawnableMapObject spawnObject in spawnableMapObjects)
+            if (selectableLevel.spawnableMapObjects.Length != 0)
             {
-                if ((Object)(object)spawnObject.prefabToSpawn.GetComponentInChildren<Landmine>() != (Object)null)
+                Plugin.log.LogInfo("Initial landmine inside");
+                foreach (SpawnableMapObject spawnObject in spawnableMapObjects)
                 {
-                    Plugin.log.LogInfo(">>>>>>>>>>Initial landmine");
-                    spawnObject.numberToSpawn = new AnimationCurve((Keyframe[])(object)new Keyframe[2]
+                    if ((Object)(object)spawnObject.prefabToSpawn.GetComponentInChildren<Landmine>() != (Object)null)
                     {
-                                new Keyframe(0f, 15f),
-                                new Keyframe(1f, 17f)
-                    });
+
+                        spawnObject.numberToSpawn = new AnimationCurve((Keyframe[])(object)new Keyframe[2]
+                        {
+                                new Keyframe(0f, Plugin.config_LandmineAmount.Value),
+                                new Keyframe(1f, Plugin.config_LandmineAmount.Value)
+                        });
+                    }
                 }
             }
+            if (selectableLevel.spawnableOutsideObjects.Length != 0 && selectableLevel.spawnableOutsideObjects.Length != 0)
+            {
+                Plugin.log.LogInfo("Initial landmine outside");
+                SpawnableOutsideObjectWithRarity[] spawnableOutsideObjectWithRarities = selectableLevel.spawnableOutsideObjects;
+                foreach (SpawnableMapObject spawnObject in spawnableMapObjects)
+                {
+                    if ((Object)(object)spawnObject.prefabToSpawn.GetComponentInChildren<Landmine>() != (Object)null)
+                    {
+
+                        spawnableOutsideObjectWithRarities.AddItem(new SpawnableOutsideObjectWithRarity
+                        {
+                            spawnableObject = new SpawnableOutsideObject
+                            {
+                                prefabToSpawn = spawnObject.prefabToSpawn,
+                            },
+                            randomAmount = new AnimationCurve((Keyframe[])(object)new Keyframe[2]
+                    {
+                            new Keyframe(0f, Plugin.config_LandmineAmount.Value),
+                            new Keyframe(1f, Plugin.config_LandmineAmount.Value)
+                    }),
+                        });
+                    }
+                }
+
+
+            }
+
+
         }
     }
 }

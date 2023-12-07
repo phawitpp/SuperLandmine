@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj": {}
+    "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj": {}
   },
   "projects": {
-    "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj": {
+    "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj": {
       "version": "1.0.1",
       "restore": {
-        "projectUniqueName": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
+        "projectUniqueName": "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
         "projectName": "SuperLandmine",
-        "projectPath": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
+        "projectPath": "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
         "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
-        "outputPath": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\obj\\",
+        "outputPath": "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\NuGet.Config",
+          "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\NuGet.Config",
           "C:\\Users\\Home\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [

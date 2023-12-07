@@ -2,10 +2,13 @@
 
 Add more power to landmine
 
+* Enemy can trigger the landmine !!!
 * Landmine is spawn more oftenly !!
 * Landmine idle sound is disabled !!
 * Landmine damage and kill range is increase !!
-* Enemy can trigger the landmine !!!
+* Landmine has a chance to spawn outside !!
+
+You can config the number of landmine to be spawned in config/Superlandmine.cfg
 
 ## Installation
 ** Require BepInEx installed first
@@ -17,6 +20,20 @@ Add more power to landmine
 
 
 ## Changelog
+
+### 1.0.3
+
+* Update README
+
+### 1.0.3
+
+* Add config to set the number of landmine spawn on map
+* Fix stuck in "Waiting for crew" <- Really sorry for this one
+
+
+### 1.0.2
+
+* Landmine has a chance to spawn outside
 
 ### 1.0.1
 

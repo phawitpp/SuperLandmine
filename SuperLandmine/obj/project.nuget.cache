@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uKWidYPndVVOCo7ysQrmG3XqDHU5mpJT7xPZ0KFumRfTeO+6uuddbA8EwrG8i2smT91yZr0UrWDhbG+4SiGK3w==",
+  "dgSpecHash": "KP0jXEQzSRt9bEIWT3nKJeCp0QVIvVymup9lio+tIhSmIhQ+/KHRrsj6XNMuNtVHOjkcFBnvEvoOgWUpIFs9uw==",
   "success": true,
-  "projectFilePath": "E:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
+  "projectFilePath": "e:\\Mod\\project\\SuperLandmine\\SuperLandmine\\SuperLandmine.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Home\\.nuget\\packages\\bepinex.analyzers\\1.0.8\\bepinex.analyzers.1.0.8.nupkg.sha512",
     "C:\\Users\\Home\\.nuget\\packages\\bepinex.baselib\\5.4.20\\bepinex.baselib.5.4.20.nupkg.sha512",
