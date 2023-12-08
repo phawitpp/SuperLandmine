@@ -10,7 +10,11 @@ namespace SuperLandmine
     {
         internal static ManualLogSource log;
         public Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
-        public static ConfigEntry<int> config_LandmineAmount;
+        public static ConfigEntry<int> config_LandmineMinAmount;
+        public static ConfigEntry<int> config_LandmineMaxAmount;
+        public static ConfigEntry<bool> config_EnableLandmineSound;
+        public static ConfigEntry<bool> config_EnemyCanTriggerLandmine;
+        public static ConfigEntry<bool> config_LandmineCanSpawnOutside;
         private void Awake()
         {
             log = base.Logger;
@@ -21,14 +25,19 @@ namespace SuperLandmine
         }
         private void ConfigSetup()
         {
-            config_LandmineAmount = ((BaseUnityPlugin)this).Config.Bind<int>("Landmine amount", "Value", 15, "How many landmine will be spawned in the map");
+            config_LandmineMinAmount = ((BaseUnityPlugin)this).Config.Bind<int>("Landmine min amount", "Value", 10, "Min landmine to be spawned in the map");
+            config_LandmineMaxAmount = ((BaseUnityPlugin)this).Config.Bind<int>("Landmine max amount", "Value", 15, "Max landmine to be spawned in the map");
+            config_EnableLandmineSound = ((BaseUnityPlugin)this).Config.Bind<bool>("Disable landmine sound", "Value", true, "Enable or disable landmine sound");
+            config_EnemyCanTriggerLandmine = ((BaseUnityPlugin)this).Config.Bind<bool>("Enemy trigger landmine", "Value", true, "Enable or disable enemy can trigger landmine");
+            config_LandmineCanSpawnOutside = ((BaseUnityPlugin)this).Config.Bind<bool>("Landmine can spawn outside", "Value", true, "Enable or disable landmine can spawn outside");
+
         }
     }
     class PluginInfo
     {
         public const string PLUGIN_GUID = "Superlandmine";
         public const string PLUGIN_NAME = "SuperLandmine";
-        public const string PLUGIN_VERSION = "1.0.3";
+        public const string PLUGIN_VERSION = "1.1.0";
     }
 
 }

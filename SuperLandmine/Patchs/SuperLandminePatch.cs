@@ -2,7 +2,9 @@ using System.Collections;
 using BepInEx;
 using GameNetcodeStuff;
 using HarmonyLib;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Networking;
 
 namespace SuperLandmine.Patchs
@@ -16,10 +18,10 @@ namespace SuperLandmine.Patchs
         public static void playTriggerSound(Landmine __instance)
         {
             Plugin.log.LogInfo("Play trigger sound");
-            __instance.mineAudio.volume = 1.5f;
-            __instance.mineFarAudio.volume = 1.5f;
+            __instance.mineAudio.volume = 1.3f;
+            __instance.mineFarAudio.volume = 1.3f;
             Traverse.Create(__instance).Field("pressMineDebounceTimer").SetValue(0.5f);
-            __instance.mineAudio.PlayOneShot(__instance.minePress, 1.5f);
+            __instance.mineAudio.PlayOneShot(__instance.minePress, 1.3f);
             WalkieTalkie.TransmitOneShotAudio(__instance.mineAudio, __instance.minePress);
         }
         [HarmonyPatch("Detonate")]
@@ -33,10 +35,10 @@ namespace SuperLandmine.Patchs
         private static IEnumerator DelayedActions(Landmine __instance)
         {
             yield return new WaitForSeconds(0.5f);
-            __instance.mineAudio.volume = 1.5f;
-            __instance.mineFarAudio.volume = 1.5f;
-            __instance.mineAudio.pitch = Random.Range(0.93f, 1.2f);
-            __instance.mineAudio.PlayOneShot(__instance.mineDetonate, 1.35f);
+            __instance.mineAudio.volume = 1.2f;
+            __instance.mineFarAudio.volume = 1.3f;
+            __instance.mineAudio.pitch = Random.Range(0.93f, 1.07f);
+            __instance.mineAudio.PlayOneShot(__instance.mineDetonate, 1.2f);
             Landmine.SpawnExplosion(__instance.transform.position + Vector3.up, spawnExplosionEffect: true, 10.0f, 12.0f);
             yield return new WaitForSeconds(0.5f);
 
@@ -47,9 +49,12 @@ namespace SuperLandmine.Patchs
         [HarmonyPostfix]
         public static void increaseIdleAnimationSpeed(Landmine __instance)
         {
-            Plugin.log.LogInfo("Disable minevolume");
-            __instance.mineAudio.volume = 0f;
-            __instance.mineFarAudio.volume = 0f;
+            if (Plugin.config_EnableLandmineSound.Value)
+            {
+                __instance.mineAudio.volume = 0f;
+                __instance.mineFarAudio.volume = 0f;
+            }
+
         }
 
 
@@ -57,88 +62,94 @@ namespace SuperLandmine.Patchs
         [HarmonyPrefix]
         public static void anyObjectTriggerLandmineEnter(ref Collider other, Landmine __instance)
         {
-            float pressMineDebounceTimer = Traverse.Create(__instance).Field("pressMineDebounceTimer").GetValue<float>();
+            if (Plugin.config_EnemyCanTriggerLandmine.Value)
+            {
+                float pressMineDebounceTimer = Traverse.Create(__instance).Field("pressMineDebounceTimer").GetValue<float>();
 
-            if (__instance.hasExploded || pressMineDebounceTimer > 0f)
-            {
-                return;
-            }
-            Plugin.log.LogInfo("Object enter mine trigger, gameobject tag: " + other.gameObject.tag);
-            if (other.CompareTag("Player"))
-            {
-                PlayerControllerB component = other.gameObject.GetComponent<PlayerControllerB>();
-                if (!(component != GameNetworkManager.Instance.localPlayerController) && component != null && !component.isPlayerDead)
-                {
-                    Traverse.Create(__instance).Field("localPlayerOnMine").SetValue(true);
-                    Traverse.Create(__instance).Field("pressMineDebounceTimer").SetValue(0.5f);
-                    __instance.PressMineServerRpc();
-                }
-            }
-            else
-            {
-                if (!other.CompareTag("PlayerRagdoll") && !other.CompareTag("PhysicsProp") && !other.CompareTag("Enemy"))
+                if (__instance.hasExploded || pressMineDebounceTimer > 0f)
                 {
                     return;
                 }
-                if ((bool)other.GetComponent<DeadBodyInfo>())
+                if (other.CompareTag("Player"))
                 {
-                    if (other.GetComponent<DeadBodyInfo>().playerScript != GameNetworkManager.Instance.localPlayerController)
+                    PlayerControllerB component = other.gameObject.GetComponent<PlayerControllerB>();
+                    if (!(component != GameNetworkManager.Instance.localPlayerController) && component != null && !component.isPlayerDead)
+                    {
+                        Traverse.Create(__instance).Field("localPlayerOnMine").SetValue(true);
+                        Traverse.Create(__instance).Field("pressMineDebounceTimer").SetValue(0.5f);
+                        __instance.PressMineServerRpc();
+                    }
+                }
+                else
+                {
+                    if (!other.CompareTag("PlayerRagdoll") && !other.CompareTag("PhysicsProp") && !other.CompareTag("Enemy"))
                     {
                         return;
                     }
-                }
-                else if ((bool)other.GetComponent<GrabbableObject>() && !other.GetComponent<GrabbableObject>().NetworkObject.IsOwner)
-                {
-                    return;
-                }
-                Traverse.Create(__instance).Field("pressMineDebounceTimer").SetValue(0.5f);
+                    if ((bool)other.GetComponent<DeadBodyInfo>())
+                    {
+                        if (other.GetComponent<DeadBodyInfo>().playerScript != GameNetworkManager.Instance.localPlayerController)
+                        {
+                            return;
+                        }
+                    }
+                    else if ((bool)other.GetComponent<GrabbableObject>() && !other.GetComponent<GrabbableObject>().NetworkObject.IsOwner)
+                    {
+                        return;
+                    }
+                    Traverse.Create(__instance).Field("pressMineDebounceTimer").SetValue(0.5f);
 
-                __instance.PressMineServerRpc();
+                    __instance.PressMineServerRpc();
+                }
+                return;
             }
-            return;
+
         }
 
         [HarmonyPatch("OnTriggerExit")]
         [HarmonyPrefix]
         public static void anyObjectTriggerLandmineExit(ref Collider other, Landmine __instance)
         {
-            bool mineActivated = Traverse.Create(__instance).Field("mineActivated").GetValue<bool>();
+            if (Plugin.config_EnemyCanTriggerLandmine.Value)
+            {
+                bool mineActivated = Traverse.Create(__instance).Field("mineActivated").GetValue<bool>();
 
-            if (__instance.hasExploded || !mineActivated)
-            {
-                return;
-            }
-            Plugin.log.LogInfo("Object leaving mine trigger, gameobject tag: " + other.gameObject.tag);
-            if (other.CompareTag("Player"))
-            {
-                PlayerControllerB component = other.gameObject.GetComponent<PlayerControllerB>();
-                if (component != null && !component.isPlayerDead && !(component != GameNetworkManager.Instance.localPlayerController))
-                {
-                    Traverse.Create(__instance).Field("localPlayerOnMine").SetValue(false);
-                    Traverse.Create(__instance).Method("TriggerMineOnLocalClientByExiting").GetValue();
-                }
-            }
-            else
-            {
-                if (!other.CompareTag("PlayerRagdoll") && !other.CompareTag("PhysicsProp") && !other.CompareTag("Enemy"))
+                if (__instance.hasExploded || !mineActivated)
                 {
                     return;
                 }
-                if ((bool)other.GetComponent<DeadBodyInfo>())
+                if (other.CompareTag("Player"))
                 {
-                    if (other.GetComponent<DeadBodyInfo>().playerScript != GameNetworkManager.Instance.localPlayerController)
+                    PlayerControllerB component = other.gameObject.GetComponent<PlayerControllerB>();
+                    if (component != null && !component.isPlayerDead && !(component != GameNetworkManager.Instance.localPlayerController))
+                    {
+                        Traverse.Create(__instance).Field("localPlayerOnMine").SetValue(false);
+                        Traverse.Create(__instance).Method("TriggerMineOnLocalClientByExiting").GetValue();
+                    }
+                }
+                else
+                {
+                    if (!other.CompareTag("PlayerRagdoll") && !other.CompareTag("PhysicsProp") && !other.CompareTag("Enemy"))
                     {
                         return;
                     }
+                    if ((bool)other.GetComponent<DeadBodyInfo>())
+                    {
+                        if (other.GetComponent<DeadBodyInfo>().playerScript != GameNetworkManager.Instance.localPlayerController)
+                        {
+                            return;
+                        }
+                    }
+                    else if ((bool)other.GetComponent<GrabbableObject>() && !other.GetComponent<GrabbableObject>().NetworkObject.IsOwner)
+                    {
+                        return;
+                    }
+                    Traverse.Create(__instance).Method("TriggerMineOnLocalClientByExiting").GetValue();
                 }
-                else if ((bool)other.GetComponent<GrabbableObject>() && !other.GetComponent<GrabbableObject>().NetworkObject.IsOwner)
-                {
-                    return;
-                }
-                Traverse.Create(__instance).Method("TriggerMineOnLocalClientByExiting").GetValue();
+
+                return;
             }
 
-            return;
         }
 
     }
@@ -148,14 +159,14 @@ namespace SuperLandmine.Patchs
     {
         [HarmonyPatch("LoadNewLevel")]
         [HarmonyPrefix]
-        public static void spawnLanmine(ref SelectableLevel newLevel)
+        public static void spawnLanmineInside(ref SelectableLevel newLevel)
         {
             Plugin.log.LogInfo("Load landmine");
             SelectableLevel selectableLevel = newLevel;
             SpawnableMapObject[] spawnableMapObjects = selectableLevel.spawnableMapObjects;
             if (selectableLevel.spawnableMapObjects.Length != 0)
             {
-                Plugin.log.LogInfo("Initial landmine inside");
+                Plugin.log.LogInfo("Spawn landmine inside");
                 foreach (SpawnableMapObject spawnObject in spawnableMapObjects)
                 {
                     if ((Object)(object)spawnObject.prefabToSpawn.GetComponentInChildren<Landmine>() != (Object)null)
@@ -163,39 +174,54 @@ namespace SuperLandmine.Patchs
 
                         spawnObject.numberToSpawn = new AnimationCurve((Keyframe[])(object)new Keyframe[2]
                         {
-                                new Keyframe(0f, Plugin.config_LandmineAmount.Value),
-                                new Keyframe(1f, Plugin.config_LandmineAmount.Value)
+                                new Keyframe(0f, Plugin.config_LandmineMinAmount.Value),
+                                new Keyframe(1f, Plugin.config_LandmineMaxAmount.Value)
                         });
                     }
                 }
             }
-            if (selectableLevel.spawnableOutsideObjects.Length != 0 && selectableLevel.spawnableOutsideObjects.Length != 0)
+        }
+        [HarmonyPatch("SpawnOutsideHazards")]
+        [HarmonyPrefix]
+        public static void spawnLandmineOutside(RoundManager __instance)
+        {
+            if (Plugin.config_LandmineCanSpawnOutside.Value)
             {
-                Plugin.log.LogInfo("Initial landmine outside");
-                SpawnableOutsideObjectWithRarity[] spawnableOutsideObjectWithRarities = selectableLevel.spawnableOutsideObjects;
-                foreach (SpawnableMapObject spawnObject in spawnableMapObjects)
+                Plugin.log.LogInfo("Load landmine");
+                SelectableLevel selectableLevel = __instance.currentLevel;
+                SpawnableMapObject[] spawnableMapObjects = selectableLevel.spawnableMapObjects;
+                if (selectableLevel.spawnableMapObjects.Length != 0)
                 {
-                    if ((Object)(object)spawnObject.prefabToSpawn.GetComponentInChildren<Landmine>() != (Object)null)
+                    Plugin.log.LogInfo("Spawn landmine outside");
+                    foreach (SpawnableMapObject spawnObject in spawnableMapObjects)
                     {
-
-                        spawnableOutsideObjectWithRarities.AddItem(new SpawnableOutsideObjectWithRarity
+                        if ((Object)(object)spawnObject.prefabToSpawn.GetComponentInChildren<Landmine>() != (Object)null)
                         {
-                            spawnableObject = new SpawnableOutsideObject
+
+                            AnimationCurve landminecurve = new AnimationCurve((Keyframe[])(object)new Keyframe[2]
                             {
-                                prefabToSpawn = spawnObject.prefabToSpawn,
-                            },
-                            randomAmount = new AnimationCurve((Keyframe[])(object)new Keyframe[2]
-                    {
-                            new Keyframe(0f, Plugin.config_LandmineAmount.Value),
-                            new Keyframe(1f, Plugin.config_LandmineAmount.Value)
-                    }),
-                        });
+                                new Keyframe(0f, Plugin.config_LandmineMinAmount.Value),
+                                new Keyframe(1f, Plugin.config_LandmineMaxAmount.Value)
+                            });
+                            Transform[] shipSpawnPathPoints = __instance.shipSpawnPathPoints;
+                            for (int i = 0; i < shipSpawnPathPoints.Length; i++)
+                            {
+                                for (int j = 0; j < landminecurve.Evaluate((float)Random.Range(0f, 1f)); j++)
+                                {
+                                    Plugin.log.LogInfo("ship spawn" + shipSpawnPathPoints[i].transform.position.ToString());
+                                    System.Random random = new System.Random();
+                                    Vector3 randomNavMeshPositionInBoxPredictable = __instance.GetRandomNavMeshPositionInBoxPredictable(shipSpawnPathPoints[i].position, 300f, __instance.navHit, random, -5);
+                                    Plugin.log.LogInfo("Spawn landmine outside at" + randomNavMeshPositionInBoxPredictable.ToString());
+                                    GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(spawnObject.prefabToSpawn, randomNavMeshPositionInBoxPredictable, Quaternion.identity);
+                                    gameObject.SetActive(value: true);
+                                    gameObject.GetComponent<NetworkObject>().Spawn();
+                                }
+                            }
+
+                        }
                     }
                 }
-
-
             }
-
 
         }
     }
