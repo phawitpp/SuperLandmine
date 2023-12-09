@@ -23,6 +23,10 @@ You can config the features in config/Superlandmine.cfg
 
 ## Changelog
 
+### 1.1.1
+
+* Fix landmine spawn outside cause game crash
+
 ### 1.1.0
 
 * Landmine spawn outside is default now.

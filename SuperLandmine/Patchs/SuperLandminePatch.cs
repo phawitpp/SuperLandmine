@@ -62,7 +62,7 @@ namespace SuperLandmine.Patchs
         [HarmonyPrefix]
         public static void anyObjectTriggerLandmineEnter(ref Collider other, Landmine __instance)
         {
-            if (Plugin.config_EnemyCanTriggerLandmine.Value)
+            if (Plugin.config_EnemyCanTriggerLandmine.Value == true)
             {
                 float pressMineDebounceTimer = Traverse.Create(__instance).Field("pressMineDebounceTimer").GetValue<float>();
 
@@ -110,7 +110,7 @@ namespace SuperLandmine.Patchs
         [HarmonyPrefix]
         public static void anyObjectTriggerLandmineExit(ref Collider other, Landmine __instance)
         {
-            if (Plugin.config_EnemyCanTriggerLandmine.Value)
+            if (Plugin.config_EnemyCanTriggerLandmine.Value == true)
             {
                 bool mineActivated = Traverse.Create(__instance).Field("mineActivated").GetValue<bool>();
 
@@ -185,7 +185,7 @@ namespace SuperLandmine.Patchs
         [HarmonyPrefix]
         public static void spawnLandmineOutside(RoundManager __instance)
         {
-            if (Plugin.config_LandmineCanSpawnOutside.Value)
+            if (Plugin.config_LandmineCanSpawnOutside.Value == true && __instance.IsServer && __instance.IsHost)
             {
                 Plugin.log.LogInfo("Load landmine");
                 SelectableLevel selectableLevel = __instance.currentLevel;
@@ -208,7 +208,6 @@ namespace SuperLandmine.Patchs
                             {
                                 for (int j = 0; j < landminecurve.Evaluate((float)Random.Range(0f, 1f)); j++)
                                 {
-                                    Plugin.log.LogInfo("ship spawn" + shipSpawnPathPoints[i].transform.position.ToString());
                                     System.Random random = new System.Random();
                                     Vector3 randomNavMeshPositionInBoxPredictable = __instance.GetRandomNavMeshPositionInBoxPredictable(shipSpawnPathPoints[i].position, 300f, __instance.navHit, random, -5);
                                     Plugin.log.LogInfo("Spawn landmine outside at" + randomNavMeshPositionInBoxPredictable.ToString());
