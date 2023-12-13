@@ -15,6 +15,7 @@ namespace SuperLandmine
         public static ConfigEntry<bool> config_EnableLandmineSound;
         public static ConfigEntry<bool> config_EnemyCanTriggerLandmine;
         public static ConfigEntry<bool> config_LandmineCanSpawnOutside;
+        public static ConfigEntry<bool> config_UseDefaultLandmineSpawnRate;
         private void Awake()
         {
             log = base.Logger;
@@ -30,6 +31,7 @@ namespace SuperLandmine
             config_EnableLandmineSound = ((BaseUnityPlugin)this).Config.Bind<bool>("Disable landmine sound", "Value", true, "Enable or disable landmine sound");
             config_EnemyCanTriggerLandmine = ((BaseUnityPlugin)this).Config.Bind<bool>("Enemy trigger landmine", "Value", true, "Enable or disable enemy can trigger landmine");
             config_LandmineCanSpawnOutside = ((BaseUnityPlugin)this).Config.Bind<bool>("Landmine can spawn outside", "Value", true, "Enable or disable landmine can spawn outside");
+            config_UseDefaultLandmineSpawnRate = ((BaseUnityPlugin)this).Config.Bind<bool>("Use default landmine spawn rate", "Value", false, "Enable or disable default landmine spawn rate");
 
         }
     }
@@ -37,7 +39,7 @@ namespace SuperLandmine
     {
         public const string PLUGIN_GUID = "Superlandmine";
         public const string PLUGIN_NAME = "SuperLandmine";
-        public const string PLUGIN_VERSION = "1.1.0";
+        public const string PLUGIN_VERSION = "1.1.2";
     }
 
 }

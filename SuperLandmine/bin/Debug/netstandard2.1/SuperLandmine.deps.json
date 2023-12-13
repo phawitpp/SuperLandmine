@@ -448,6 +448,14 @@
           }
         }
       },
+      "Assembly-CSharp-firstpass/0.0.0.0": {
+        "runtime": {
+          "Assembly-CSharp-firstpass.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "Facepunch Transport for Netcode for GameObjects/0.0.0.0": {
         "runtime": {
           "Facepunch Transport for Netcode for GameObjects.dll": {
@@ -475,14 +483,6 @@
       "Unity.Collections/0.0.0.0": {
         "runtime": {
           "Unity.Collections.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "Assembly-CSharp-firstpass/0.0.0.0": {
-        "runtime": {
-          "Assembly-CSharp-firstpass.dll": {
             "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
           }
@@ -994,6 +994,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Assembly-CSharp-firstpass/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Facepunch Transport for Netcode for GameObjects/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -1010,11 +1015,6 @@
       "sha512": ""
     },
     "Unity.Collections/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Assembly-CSharp-firstpass/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

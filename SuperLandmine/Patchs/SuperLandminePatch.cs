@@ -43,11 +43,21 @@ namespace SuperLandmine.Patchs
             yield return new WaitForSeconds(0.5f);
 
         }
-
-
-        [HarmonyPatch("StartIdleAnimation")]
+        [HarmonyPatch("Detonate")]
         [HarmonyPostfix]
-        public static void increaseIdleAnimationSpeed(Landmine __instance)
+        public static void disableSoundAfterExplode(Landmine __instance)
+        {
+            if (Plugin.config_EnableLandmineSound.Value)
+            {
+                __instance.mineAudio.volume = 0f;
+                __instance.mineFarAudio.volume = 0f;
+            }
+        }
+
+
+        [HarmonyPatch("Start")]
+        [HarmonyPostfix]
+        public static void enabledLandMineSound(Landmine __instance)
         {
             if (Plugin.config_EnableLandmineSound.Value)
             {
@@ -161,6 +171,10 @@ namespace SuperLandmine.Patchs
         [HarmonyPrefix]
         public static void spawnLanmineInside(ref SelectableLevel newLevel)
         {
+            if (Plugin.config_UseDefaultLandmineSpawnRate.Value == true)
+            {
+                return;
+            }
             Plugin.log.LogInfo("Load landmine");
             SelectableLevel selectableLevel = newLevel;
             SpawnableMapObject[] spawnableMapObjects = selectableLevel.spawnableMapObjects;

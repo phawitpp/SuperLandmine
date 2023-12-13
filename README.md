@@ -10,7 +10,7 @@ Add more power to landmine
 
 You can config the features in config/Superlandmine.cfg
 - Set the min/max amount of the landmine to be spawn
-- Enable/Disable -> Landmine sound, Outside Spawning, Enemy trigger
+- Enable/Disable -> Landmine sound, Outside Spawning, Enemy trigger, Default landmine spawn rate
 
 ## Installation
 ** Require BepInEx installed first
@@ -22,6 +22,11 @@ You can config the features in config/Superlandmine.cfg
 
 
 ## Changelog
+
+### 1.1.2
+
+* Add config to set default landmine spawn rate (Default value: false)
+* Fix some issue that the landmine sound still enable even disable it.
 
 ### 1.1.1
 
