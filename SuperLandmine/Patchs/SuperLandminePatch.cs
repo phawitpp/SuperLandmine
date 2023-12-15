@@ -224,8 +224,10 @@ namespace SuperLandmine.Patchs
                                 {
                                     System.Random random = new System.Random();
                                     Vector3 randomNavMeshPositionInBoxPredictable = __instance.GetRandomNavMeshPositionInBoxPredictable(shipSpawnPathPoints[i].position, 300f, __instance.navHit, random, -5);
+                                    Quaternion rotation;
+                                    (randomNavMeshPositionInBoxPredictable, rotation) = Utils.projectToGround(randomNavMeshPositionInBoxPredictable);
                                     Plugin.log.LogInfo("Spawn landmine outside at" + randomNavMeshPositionInBoxPredictable.ToString());
-                                    GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(spawnObject.prefabToSpawn, randomNavMeshPositionInBoxPredictable, Quaternion.identity);
+                                    GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(spawnObject.prefabToSpawn, randomNavMeshPositionInBoxPredictable, rotation);
                                     gameObject.SetActive(value: true);
                                     gameObject.GetComponent<NetworkObject>().Spawn();
                                 }
