@@ -2,7 +2,7 @@
 
 namespace SuperLandmine {
     public static class Utils {
-        public const float MAX_RAYCAST_DIST = 1000f;
+        public const float MAX_RAYCAST_DIST = 10000f;
         /// <summary>
         /// 
         /// </summary>
