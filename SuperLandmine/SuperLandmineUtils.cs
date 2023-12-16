@@ -2,7 +2,7 @@
 
 namespace SuperLandmine {
     public static class Utils {
-        public const float MAX_RAYCAST_DIST = 10000f;
+        public const float MAX_RAYCAST_DIST = 30000f;
         /// <summary>
         /// 
         /// </summary>
@@ -19,5 +19,10 @@ namespace SuperLandmine {
             }
             return (pos, quaternion);
         }
+
+        /// <summary>
+        /// A marker class to identify outside landmines
+        /// </summary>
+        public class OutsideLandmineMarker : MonoBehaviour { }
     }
 }
