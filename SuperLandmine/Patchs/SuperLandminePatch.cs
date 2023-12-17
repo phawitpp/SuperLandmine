@@ -201,6 +201,12 @@ namespace SuperLandmine.Patchs
         {
             if (Plugin.config_LandmineCanSpawnOutside.Value == true && __instance.IsServer && __instance.IsHost)
             {
+                // Delete all existing landmines
+                Utils.OutsideLandmineMarker[] outsideLandmines = GameObject.FindObjectsOfType<Utils.OutsideLandmineMarker>();
+                foreach (Utils.OutsideLandmineMarker landmineMarker in outsideLandmines) {
+                    GameObject.Destroy(landmineMarker.gameObject);
+                }
+
                 Plugin.log.LogInfo("Load landmine");
                 SelectableLevel selectableLevel = __instance.currentLevel;
                 SpawnableMapObject[] spawnableMapObjects = selectableLevel.spawnableMapObjects;
@@ -224,10 +230,14 @@ namespace SuperLandmine.Patchs
                                 {
                                     System.Random random = new System.Random();
                                     Vector3 randomNavMeshPositionInBoxPredictable = __instance.GetRandomNavMeshPositionInBoxPredictable(shipSpawnPathPoints[i].position, 300f, __instance.navHit, random, -5);
+                                    Quaternion rotation;
+                                    (randomNavMeshPositionInBoxPredictable, rotation) = Utils.projectToGround(randomNavMeshPositionInBoxPredictable);
                                     Plugin.log.LogInfo("Spawn landmine outside at" + randomNavMeshPositionInBoxPredictable.ToString());
-                                    GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(spawnObject.prefabToSpawn, randomNavMeshPositionInBoxPredictable, Quaternion.identity);
+                                    GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(spawnObject.prefabToSpawn, randomNavMeshPositionInBoxPredictable, rotation);
                                     gameObject.SetActive(value: true);
                                     gameObject.GetComponent<NetworkObject>().Spawn();
+                                    // Mark this as an outside landmine
+                                    gameObject.AddComponent<Utils.OutsideLandmineMarker>();
                                 }
                             }
 
