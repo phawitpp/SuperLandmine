@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("SuperLandmine mod for Lethal Company")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+494216e2c83f01493bb3bbe4e963fdf667503d01")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+05588e298c4ebb35ba7eda9a96c96de6cd6233e1")]
 [assembly: System.Reflection.AssemblyProductAttribute("SuperLandmine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SuperLandmine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.1.0")]

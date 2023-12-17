@@ -39,7 +39,7 @@ namespace SuperLandmine
     {
         public const string PLUGIN_GUID = "Superlandmine";
         public const string PLUGIN_NAME = "SuperLandmine";
-        public const string PLUGIN_VERSION = "1.1.2";
+        public const string PLUGIN_VERSION = "1.1.3";
     }
 
 }
